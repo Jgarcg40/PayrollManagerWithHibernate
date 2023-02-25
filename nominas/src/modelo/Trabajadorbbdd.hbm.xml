@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-feb-2019 17:35:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Trabajadorbbdd" table="trabajadorbbdd" catalog="nominas" optimistic-lock="version">
+        <id name="idTrabajador" type="java.lang.Integer">
+            <column name="idTrabajador" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categorias" class="modelo.Categorias" fetch="select">
+            <column name="IdCategoria" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresas" class="modelo.Empresas" fetch="select">
+            <column name="IdEmpresa" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="50" not-null="true" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="Apellido1" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="Apellido2" />
+        </property>
+        <property name="nifnie" type="string">
+            <column name="NIFNIE" length="10" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="FechaAlta" length="10" />
+        </property>
+        <property name="codigoCuenta" type="string">
+            <column name="CodigoCuenta" length="20" />
+        </property>
+        <property name="iban" type="string">
+            <column name="IBAN" length="20" />
+        </property>
+        <set name="nominas" table="nomina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTrabajador" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Nomina" />
+        </set>
+    </class>
+</hibernate-mapping>
